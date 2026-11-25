@@ -1,0 +1,23 @@
+<h1>Meu painel</h1>
+<p>Olá, <strong><%= usuario.nome %></strong>. Aqui estão as suas inscrições.</p>
+<div id="mensagem" class="mensagem" aria-live="polite" hidden></div>
+
+<% if (inscricoes.length === 0) { %>
+  <section class="cartao centro">
+    <p>Você ainda não se inscreveu em nenhum evento.</p>
+    <a href="/eventos" class="botao">Ver eventos</a>
+  </section>
+<% } else { %>
+  <div class="grade">
+    <% inscricoes.forEach(function (i) { %>
+      <article class="cartao evento" id="evento-<%= i.evento.id %>">
+        <span class="etiqueta"><%= i.evento.categoria ? i.evento.categoria.nome : '' %></span>
+        <h2><a href="/eventos/<%= i.evento.id %>"><%= i.evento.titulo %></a></h2>
+        <p class="info"><%= new Date(i.evento.data + 'T12:00:00').toLocaleDateString('pt-BR') %> · <%= i.evento.local %></p>
+        <div class="js-acao">
+          <button class="botao botao-perigo js-inscricao" data-acao="cancelar" data-remover="1" data-evento="<%= i.evento.id %>" data-inscricao="<%= i.id %>">Cancelar inscrição</button>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+<% } %>

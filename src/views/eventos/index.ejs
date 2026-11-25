@@ -1,0 +1,29 @@
+<div class="cabecalho-pagina">
+  <h1>Eventos</h1>
+  <% if (usuario && usuario.papel === 'admin') { %>
+    <a href="/eventos/novo" class="botao">+ Novo evento</a>
+  <% } %>
+</div>
+
+<!-- AJAX 1: busca enquanto digita -->
+<section class="cartao">
+  <label for="busca" class="rotulo">Buscar evento pelo título</label>
+  <input type="search" id="busca" placeholder="Ex.: oficina, node, segurança..." autocomplete="off">
+  <p id="busca-status" class="nota" aria-live="polite"></p>
+  <ul id="busca-resultados" class="lista-busca"></ul>
+</section>
+
+<div id="mensagem" class="mensagem" aria-live="polite" hidden></div>
+
+<div class="grade">
+  <% eventos.forEach(function (ev) { %>
+    <article class="cartao evento" id="evento-<%= ev.id %>">
+      <span class="etiqueta"><%= ev.categoria ? ev.categoria.nome : '' %></span>
+      <h2><a href="/eventos/<%= ev.id %>"><%= ev.titulo %></a></h2>
+      <p class="info"><%= new Date(ev.data + 'T12:00:00').toLocaleDateString('pt-BR') %> · <%= ev.local %></p>
+      <p class="vagas">Vagas: <span class="js-ocupadas"><%= ev.ocupadas %></span>/<%= ev.vagas %></p>
+      <div class="js-acao"><%- include('../partials/botaoInscricao', { ev: ev }) %></div>
+    </article>
+  <% }) %>
+  <% if (eventos.length === 0) { %><p>Nenhum evento cadastrado ainda.</p><% } %>
+</div>

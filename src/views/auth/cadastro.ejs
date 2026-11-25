@@ -1,0 +1,12 @@
+<section class="cartao formulario">
+  <h1>Criar conta</h1>
+  <% if (erro) { %><p class="alerta"><%= erro %></p><% } %>
+  <form action="/cadastro" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Nome <input type="text" name="nome" value="<%= dados.nome || '' %>" minlength="2" maxlength="100" required></label>
+    <label>E-mail <input type="email" name="email" value="<%= dados.email || '' %>" required></label>
+    <label>Senha (mínimo 8 caracteres) <input type="password" name="senha" minlength="8" required></label>
+    <button type="submit" class="botao">Cadastrar</button>
+  </form>
+  <p class="nota">Já tem conta? <a href="/login">Entrar</a></p>
+</section>

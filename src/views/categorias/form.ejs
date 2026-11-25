@@ -1,0 +1,12 @@
+<section class="cartao formulario">
+  <h1><%= titulo %></h1>
+  <% if (erro) { %><p class="alerta"><%= erro %></p><% } %>
+  <form action="<%= categoria.id ? '/categorias/' + categoria.id + '/editar' : '/categorias' %>" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Nome <input type="text" name="nome" value="<%= categoria.nome || '' %>" minlength="2" maxlength="60" required autofocus></label>
+    <div class="acoes">
+      <button type="submit" class="botao">Salvar</button>
+      <a href="/categorias" class="botao botao-secundario">Cancelar</a>
+    </div>
+  </form>
+</section>

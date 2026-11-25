@@ -1,0 +1,23 @@
+<div class="cabecalho-pagina">
+  <h1>Categorias</h1>
+  <a href="/categorias/nova" class="botao">+ Nova categoria</a>
+</div>
+<% if (erro) { %><p class="alerta"><%= erro %></p><% } %>
+<table class="tabela cartao">
+  <thead><tr><th>Nome</th><th>Eventos</th><th>Ações</th></tr></thead>
+  <tbody>
+    <% categorias.forEach(function (c) { %>
+      <tr>
+        <td><%= c.nome %></td>
+        <td><%= c.eventos.length %></td>
+        <td class="acoes">
+          <a href="/categorias/<%= c.id %>/editar" class="botao botao-secundario botao-pequeno">Editar</a>
+          <form action="/categorias/<%= c.id %>/excluir" method="POST" class="form-inline js-confirmar" data-pergunta="Excluir esta categoria?">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="botao botao-perigo botao-pequeno">Excluir</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

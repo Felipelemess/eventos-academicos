@@ -1,0 +1,22 @@
+<header class="topo">
+  <div class="container topo-conteudo">
+    <a href="/eventos" class="marca">Eventos Acadêmicos</a>
+    <nav>
+      <a href="/eventos" class="<%= caminho.startsWith('/eventos') ? 'ativo' : '' %>">Eventos</a>
+      <% if (usuario) { %>
+        <a href="/painel" class="<%= caminho === '/painel' ? 'ativo' : '' %>">Meu painel</a>
+        <% if (usuario.papel === 'admin') { %>
+          <a href="/categorias" class="<%= caminho.startsWith('/categorias') ? 'ativo' : '' %>">Categorias</a>
+        <% } %>
+        <span class="ola">Olá, <%= usuario.nome %></span>
+        <form action="/logout" method="POST" class="form-inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="link-botao">Sair</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Entrar</a>
+        <a href="/cadastro" class="botao botao-pequeno">Criar conta</a>
+      <% } %>
+    </nav>
+  </div>
+</header>

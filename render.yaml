@@ -1,0 +1,33 @@
+# Deploy automático no Render (Blueprint): cria o banco PostgreSQL e o serviço web.
+databases:
+  - name: eventos-db
+    plan: free
+    databaseName: eventos
+    user: eventos
+
+services:
+  - type: web
+    name: eventos-academicos
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: eventos-db
+          property: connectionString
+      - key: DB_SSL
+        value: "false"
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_SENHA
+        sync: false
+      - key: TESTE_EMAIL
+        sync: false
+      - key: TESTE_SENHA
+        sync: false

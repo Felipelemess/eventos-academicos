@@ -1,0 +1,9 @@
+<% if (!usuario) { %>
+  <a href="/login" class="botao botao-secundario">Entre para se inscrever</a>
+<% } else if (ev.minhaInscricaoId) { %>
+  <button class="botao botao-perigo js-inscricao" data-acao="cancelar" data-evento="<%= ev.id %>" data-inscricao="<%= ev.minhaInscricaoId %>">Cancelar inscrição</button>
+<% } else if (ev.ocupadas >= ev.vagas) { %>
+  <button class="botao" disabled>Esgotado</button>
+<% } else { %>
+  <button class="botao js-inscricao" data-acao="inscrever" data-evento="<%= ev.id %>">Inscrever-se</button>
+<% } %>

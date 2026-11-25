@@ -1,0 +1,26 @@
+<section class="cartao formulario largo">
+  <h1><%= titulo %></h1>
+  <% if (erro) { %><p class="alerta"><%= erro %></p><% } %>
+  <form action="<%= evento.id ? '/eventos/' + evento.id + '/editar' : '/eventos' %>" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Título <input type="text" name="titulo" value="<%= evento.titulo || '' %>" minlength="3" maxlength="120" required></label>
+    <label>Descrição <textarea name="descricao" rows="4" required><%= evento.descricao || '' %></textarea></label>
+    <div class="linha">
+      <label>Data <input type="date" name="data" value="<%= evento.data || '' %>" required></label>
+      <label>Vagas <input type="number" name="vagas" value="<%= evento.vagas || '' %>" min="1" max="5000" required></label>
+    </div>
+    <label>Local <input type="text" name="local" value="<%= evento.local || '' %>" maxlength="120" required></label>
+    <label>Categoria
+      <select name="categoriaId" required>
+        <option value="">Selecione...</option>
+        <% categorias.forEach(function (c) { %>
+          <option value="<%= c.id %>" <%= Number(evento.categoriaId) === c.id ? 'selected' : '' %>><%= c.nome %></option>
+        <% }) %>
+      </select>
+    </label>
+    <div class="acoes">
+      <button type="submit" class="botao">Salvar</button>
+      <a href="/eventos" class="botao botao-secundario">Cancelar</a>
+    </div>
+  </form>
+</section>
