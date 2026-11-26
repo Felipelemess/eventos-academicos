@@ -115,13 +115,11 @@ npm test
 
 ## Equipe
 
-| Integrante | Papel |
+| Integrante | Responsabilidades |
 |---|---|
-| Nome 1 | Coordenação |
-| Nome 2 | Dados |
-| Nome 3 | Servidor |
-| Nome 4 | Cliente |
-| Nome 5 | Qualidade |
+| Evelyn | Coordenação e documentação do projeto |
+|Felipe | Banco de dados, DER e rotas do servidor |
+| Breno | Interface do cliente, testes e segurança |
 
 ## Uso de IA e código de terceiros
 
