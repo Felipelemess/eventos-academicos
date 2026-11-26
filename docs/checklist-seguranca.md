@@ -14,6 +14,7 @@
 | 10 | Segredos fora do Git | Procurar senha no histórico | Passou: só `.env.example` sem valores | `.gitignore` inclui `.env` |
 | 11 | CSRF | POST sem o token | Passou: 403 | `middlewares/csrf.js` |
 | 12 | Cabeçalhos HTTP | Ver resposta no DevTools | Passou: CSP, X-Frame-Options etc. | `helmet()` em `src/app.js` |
+| 13 | Dependências sem falhas conhecidas | Rodar `npm audit` | Falhou: 3 vulnerabilidades moderadas (uuid) → corrigido | `overrides` no `package.json` |
 
 Testes automatizados que cobrem os itens 1, 6, 7 e 11: `npm test`.
 
