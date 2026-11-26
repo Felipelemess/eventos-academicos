@@ -2,7 +2,7 @@
 
 Sistema web para divulgar palestras, oficinas e semanas acadêmicas da faculdade e controlar as inscrições dos alunos. Projeto Integrador de Programação Web.
 
-**URL pública:** https://SEU-PROJETO.onrender.com  *(trocar depois do deploy)*
+**URL pública:** https://eventos-academicos.onrender.com
 
 **Usuário de teste:** `aluno@eventos.com` · a senha foi enviada ao professor por mensagem.
 
@@ -24,7 +24,7 @@ Node.js 18+ · Express 5 · EJS (com layout) · Sequelize · MySQL ou PostgreSQL
 
 1. Clone o repositório e entre na pasta:
    ```bash
-   git clone https://github.com/SEU-USUARIO/eventos-academicos.git
+   git clone https://github.com/Felipelemess/eventos-academicos.git
    cd eventos-academicos
    ```
 2. Instale as dependências:
@@ -97,13 +97,31 @@ erDiagram
 
 ## Funções AJAX (C4)
 
-*(Inserir aqui o print da aba Network do DevTools mostrando as requisições `fetch` para `/api/eventos?q=...` e `/api/eventos/:id/inscricao`.)*
+Prints da aba **Network** (filtro Fetch/XHR) no site publicado. As requisições aparecem como `fetch` e a página não recarrega.
+
+**AJAX 1 · busca enquanto digita** (`eventos?q=node`, status 200):
+
+![Busca AJAX na aba Network](docs/network.png)
+
+**AJAX 2 · inscrição sem recarregar** (`inscricao`, status 201):
+
+![Inscrição AJAX na aba Network](docs/network-inscricao.png)
 
 Com o servidor desligado, as duas funções mostram a mensagem "Sem conexão com o servidor. Tente de novo." em vez de quebrar a página.
 
 ## Segurança
 
-Checklist completo com os 12 itens auditados: [docs/checklist-seguranca.md](docs/checklist-seguranca.md)
+Checklist completo com os itens auditados: [docs/checklist-seguranca.md](docs/checklist-seguranca.md)
+
+Na auditoria, o `npm audit` encontrou 3 vulnerabilidades moderadas na biblioteca `uuid` (usada pelo Sequelize). A correção foi feita no commit `fix(seguranca): atualiza uuid para remover 3 vulnerabilidades`, e o `npm audit` passou a mostrar 0 vulnerabilidades.
+
+Senhas guardadas apenas como hash bcrypt no banco:
+
+![Tabela usuarios com senhas em hash](docs/hash-senhas%20%281%29.png)
+
+## Sistema publicado (C7)
+
+![Sistema publicado no Render, aberto em aba anônima](docs/site-publicado.png)
 
 ## Testes
 
@@ -123,4 +141,4 @@ npm test
 
 ## Uso de IA e código de terceiros
 
-Parte do código foi gerada com auxílio de IA (Claude, da Anthropic) e revisada pelo grupo. Bibliotecas de terceiros estão listadas no `package.json`.
+Parte do código foi gerada com auxílio de IA (Claude, da Anthropic) e revisada pelo grupo. A declaração de uso de IA assinada pelos integrantes foi entregue separadamente ao professor. Bibliotecas de terceiros estão listadas no `package.json`.
